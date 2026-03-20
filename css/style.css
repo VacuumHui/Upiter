@@ -28,3 +28,15 @@ canvas { display: block; }
 .close-btn { margin-top: 20px; padding: 10px; text-align: center; border: 1px solid #ff5555; color: #ff5555; cursor: pointer; }
 
 #win-msg { display: none; position: absolute; top: 25%; left: 50%; transform: translate(-50%, -50%); color: #33ff33; font-size: 20px; text-align: center; z-index: 5; text-shadow: 0 0 10px rgba(51, 255, 51, 0.5);}
+
+/* Выключенная кнопка (серая, не нажимается) */
+.hud-btn.disabled {
+    border-color: #334455;
+    color: #334455;
+    cursor: not-allowed;
+    background-color: transparent;
+}
+.hud-btn.disabled:active {
+    background-color: transparent;
+    color: #334455;
+}
