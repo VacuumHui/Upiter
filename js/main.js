@@ -36,6 +36,12 @@ function drawGrid() {
 // ГЛАВНЫЙ ИГРОВОЙ ЦИКЛ
 // ГЛАВНЫЙ ИГРОВОЙ ЦИКЛ (Обновленный)
 function loop() {
+    // Отрисовка UI (джойстик поверх всего)
+    drawJoystick(ctx);
+
+    // ОБНОВЛЕНИЕ ТЕКСТА И КНОПОК (Добавлено)
+    if (typeof updateUI === 'function') updateUI();
+    
     // Обновляем камеру
     camera.update();
 
