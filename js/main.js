@@ -17,7 +17,7 @@ resizeCanvas();
 function drawGrid() {
     ctx.strokeStyle = 'rgba(40, 60, 50, 0.2)';
     ctx.lineWidth = 1 / camera.zoom;
-    const gridSize = 500;
+    const gridSize = 100;
     const left = camera.x - (width/2)/camera.zoom;
     const right = camera.x + (width/2)/camera.zoom;
     const top = camera.y - (height/2)/camera.zoom;
@@ -40,7 +40,7 @@ function loop() {
     camera.update();
 
     // Заливаем фон космоса
-    ctx.fillStyle = '#12151c';
+    ctx.fillStyle = '#0b0f19';
     ctx.fillRect(0, 0, width, height);
 
     // ОБНОВЛЕНИЕ ФИЗИКИ
