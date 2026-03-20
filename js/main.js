@@ -32,8 +32,6 @@ function drawGrid() {
     ctx.stroke();
 }
 
-// Заглушка для корабля (чтобы камера не ломалась, пока мы не создали ship.js)
-const ship = { x: 0, y: 0 };
 
 // ГЛАВНЫЙ ИГРОВОЙ ЦИКЛ
 // ГЛАВНЫЙ ИГРОВОЙ ЦИКЛ (Обновленный)
@@ -45,32 +43,29 @@ function loop() {
     ctx.fillStyle = '#12151c';
     ctx.fillRect(0, 0, width, height);
 
-    // --- ОБНОВЛЕНИЕ ФИЗИКИ МИРА ---
-    // Двигаем планеты и астероиды по орбитам
+    // ОБНОВЛЕНИЕ ФИЗИКИ
     bodies.forEach(b => b.update());
     asteroids.forEach(a => a.update());
+    
+    // ДОБАВЛЕНО: Обновление физики корабля
+    if (typeof ship !== 'undefined') ship.update(); 
 
-    // --- НАЧАЛО ОТРИСОВКИ МИРА ---
+    // ОТРИСОВКА
     ctx.save();
-    // Переносим 0,0 в центр экрана, применяем зум и сдвигаем мир за камерой
-    ctx.translate(width / 2, height / 2);
-    ctx.scale(camera.zoom, camera.zoom);
-    ctx.translate(-camera.x, -camera.y);
+    ctx.translate(width / 2, height / 2); ctx.scale(camera.zoom, camera.zoom); ctx.translate(-camera.x, -camera.y);
 
     drawGrid();
-
-    // Отрисовка всех объектов вселенной (передаем zoom для правильной толщины линий)
     asteroids.forEach(a => a.draw(ctx, camera.zoom));
     bodies.forEach(b => b.draw(ctx, camera.zoom));
+    
+    // ДОБАВЛЕНО: Отрисовка корабля
+    if (typeof ship !== 'undefined') ship.draw(ctx, camera.zoom); 
 
     ctx.restore();
-    // --- КОНЕЦ ОТРИСОВКИ МИРА ---
 
-    // Отрисовка UI (джойстик поверх всего)
     drawJoystick(ctx);
 
     requestAnimationFrame(loop);
 }
 
-// Запуск!
 loop();
