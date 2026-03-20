@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Space Lander</title>
+    <!-- Подключаем стили -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Игровой холст -->
+    <canvas id="gameCanvas"></canvas>
+    
+    <!-- Верхний интерфейс (Информация о системе) -->
+    <div id="top-hud"></div>
+
+    <!-- Нижний интерфейс (Телеметрия) -->
+    <div id="hud"></div>
+
+    <!-- Кнопки управления -->
+    <div class="btn-container">
+        <div class="hud-btn" id="tgt-btn">TGT</div>
+        <div class="hud-btn" id="auto-btn">AUTO</div>
+    </div>
+    
+    <!-- Сообщение о победе -->
+    <div id="win-msg">ALL DATA COLLECTED!<br>SYSTEM CLEARED</div>
+
+    <!-- Меню выбора цели -->
+    <div id="target-menu">
+        <div class="menu-title">SELECT TARGET</div>
+        <div id="target-list"></div>
+        <div class="close-btn" id="close-btn">CANCEL</div>
+    </div>
+
+    <!-- Подключаем скрипты (строгий порядок или модули) -->
+    <script src="js/camera.js"></script>
+    <script src="js/input.js"></script>
+    <script src="js/universe.js"></script>
+    <script src="js/ship.js"></script>
+    <script src="js/ui.js"></script>
+    <!-- main.js запускается последним, когда всё загружено -->
+    <script src="js/main.js"></script>
+</body>
+</html>
