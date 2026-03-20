@@ -36,30 +36,37 @@ function drawGrid() {
 const ship = { x: 0, y: 0 };
 
 // ГЛАВНЫЙ ИГРОВОЙ ЦИКЛ
+// ГЛАВНЫЙ ИГРОВОЙ ЦИКЛ (Обновленный)
 function loop() {
+    // Обновляем камеру
     camera.update();
 
-    // Заливаем фон
+    // Заливаем фон космоса
     ctx.fillStyle = '#12151c';
     ctx.fillRect(0, 0, width, height);
 
-    // Включаем трансформацию мира
+    // --- ОБНОВЛЕНИЕ ФИЗИКИ МИРА ---
+    // Двигаем планеты и астероиды по орбитам
+    bodies.forEach(b => b.update());
+    asteroids.forEach(a => a.update());
+
+    // --- НАЧАЛО ОТРИСОВКИ МИРА ---
     ctx.save();
+    // Переносим 0,0 в центр экрана, применяем зум и сдвигаем мир за камерой
     ctx.translate(width / 2, height / 2);
     ctx.scale(camera.zoom, camera.zoom);
     ctx.translate(-camera.x, -camera.y);
 
     drawGrid();
 
-    // Временный красный кружок - центр вселенной (0,0)
-    ctx.beginPath();
-    ctx.arc(0, 0, 20, 0, Math.PI*2);
-    ctx.fillStyle = 'red';
-    ctx.fill();
+    // Отрисовка всех объектов вселенной (передаем zoom для правильной толщины линий)
+    asteroids.forEach(a => a.draw(ctx, camera.zoom));
+    bodies.forEach(b => b.draw(ctx, camera.zoom));
 
     ctx.restore();
+    // --- КОНЕЦ ОТРИСОВКИ МИРА ---
 
-    // Рисуем интерфейс поверх всего
+    // Отрисовка UI (джойстик поверх всего)
     drawJoystick(ctx);
 
     requestAnimationFrame(loop);
